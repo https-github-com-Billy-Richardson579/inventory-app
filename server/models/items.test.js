@@ -20,7 +20,7 @@ describe('Item model', () => {
 
     const test = await Item.create(newItem);
 
-    
+    expect(test.title).toBe(newItem)
 
 
 
