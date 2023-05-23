@@ -1,4 +1,5 @@
-const { sequelize, Item } = require('./path/to/your/ItemModel.js');
+const { sequelize} = require('../db');
+const {Item} = require('./Item.js')
 
 // Test case for creating an item
 describe('Item model', () => {
@@ -20,10 +21,6 @@ describe('Item model', () => {
 
     const test = await Item.create(newItem);
 
-    expect(test.title).toBe(newItem)
-
-
-
-
+    expect(test.title).toBe(newItem.title)
   })
 });
