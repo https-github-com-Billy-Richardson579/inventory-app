@@ -24,7 +24,6 @@ describe('./items endpoint', () => {
     const id = 1;
     const response = await request(app).get(`/api/items/${id}`);
     
-    console.log(response)
     expect(response.body.id).toBe(id);
     expect(response.statusCode).toBe(200);
   });
