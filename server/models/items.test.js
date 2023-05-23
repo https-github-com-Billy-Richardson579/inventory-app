@@ -1,4 +1,4 @@
-const { sequelize, Item } = require('./path/to/your/ItemModel.js');
+const { sequelize, Item } = require('./');
 
 // Test case for creating an item
 describe('Item model', () => {
