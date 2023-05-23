@@ -14,7 +14,7 @@ describe('Item model', () => {
   it('should create a new item', async () => {
     const newItem = {
       title: 'Test Item',
-      price: '10.00',
+      price: 10.00,
       image: 'Img.com',
       category: 'Sample Cat',
       description: 'Sample Desc',
@@ -33,7 +33,7 @@ describe('Item model', () => {
   it('Checks the Datatypes are correct', async () => {
     const newItem = {
       title: 'Test Item',
-      price: '10.00',
+      price: 10.00,
       image: 'Img.com',
       category: 'Sample Cat',
       description: 'Sample Desc',
@@ -41,5 +41,9 @@ describe('Item model', () => {
     const test = await Item.create(newItem);
     
     expect(typeof(test.title)).toBe('string')
+    expect(typeof(test.image)).toBe('string')
+    expect(typeof(test.category)).toBe('string')
+    expect(typeof(test.description)).toBe('string')
+    expect(typeof(test.price)).toBe('number')
 });
 })
