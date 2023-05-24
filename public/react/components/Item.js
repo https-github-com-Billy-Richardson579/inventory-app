@@ -1,9 +1,13 @@
 import React from 'react';
 
-export const Item = ({item}) => {
+export const Item = ({ item, onItemClick }) => {
+  const handleClick = () => {
+    onItemClick(item.id);
+  };
 
-  return <>
-    <h3>{item.title}</h3>
-    <img src={item.image} alt={item.name}/>
-  </>
-} 
+  return (
+    <div onClick={handleClick}>
+      <h3>{item.title}</h3>
+    </div>
+  );
+};
