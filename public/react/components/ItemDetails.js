@@ -9,7 +9,7 @@ export const ItemDetails = ({ item, onBackToList, onDelete }) => {
 
   return (
     <div>
-      <h2>Item Details</h2>
+      <h2>Item Detail</h2>
       <p>Name: {title}</p>
       <p>Price: {price}</p>
       <p>Category: {category}</p>
