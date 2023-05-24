@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Item = (props) => {
+export const Item = ({item, onClick }) => {
 
   return <>
-    <h3>{props.item.title}</h3>
-    {/* <img src={props.item.image} alt={props.item.name} /> */}
+    <h3 onClick={onClick}>{item.title}</h3>
+    {/* <img src={item.image} alt={item.name} /> */}
   </>
 } 

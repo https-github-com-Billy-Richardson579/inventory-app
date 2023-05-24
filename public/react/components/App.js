@@ -9,7 +9,7 @@ import apiURL from '../api';
 export const App = () => {
 	const [sauces, setSauces] = useState([]);
 	const [items, setItems] = useState([])
-	const [selectedItem, setSelectedItem] = useState (null)
+	const [selectedItem, setSelectedItem] = useState ({})
 
 	async function fetchSauces(){
 		try {
@@ -26,27 +26,26 @@ export const App = () => {
 		try {
 			const response = await fetch(`${apiURL}/items`);
 			const itemsData = await response.json();
-
 			setItems(itemsData);
 		} catch (err) {
 			console.log("Oh no an error! ", err)
 		}
 	}
 
-	// async function fetchItemsDetails(id){
-	// 	try{
-	// 		const res = await fetch(`${apiURL}/items/${id}`);
-	// 		const itemData = await response.json();
-	// 		setSelectedItem(itemData);
-	// 	}
-	// 	catch(err){
-	// 		console.log("Error",err)
-	// 	}
-	// }
+	async function fetchItemsDetails(id){
+		try{
+			const res = await fetch(`${apiURL}/items/${id}`);
+			const itemData = await res.json();
+			setSelectedItem(itemData);
+		}
+		catch(err){
+			console.log("Error",err)
+		}
+	}
 
-	// function handleClick(id){
-	// 	fetchItemsDetails(id)
-	// }
+	function handleClick(id){
+		fetchItemsDetails(id)
+	}
 	useEffect(() => {
 		fetchSauces();
 	}, []);
@@ -60,11 +59,13 @@ export const App = () => {
 			
       <h1>Sauce Store</h1>
 			<h2>All things 🔥</h2>
+		
 			<SaucesList sauces={sauces} />
 	  <h1> All Clothing Items</h1>
-			<ItemList items = {items} />
+			<ItemList items = {items} onPageClick={handleClick}/>
 			{/* onClick ={handleClick}  */}
-			{/* <ItemDetails item={selectedItem}/> */}
+			<ItemDetails item={selectedItem} />
+			{/* {console.log(selectedItem)} */}
 		</main>
 	)
 }
