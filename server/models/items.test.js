@@ -1,6 +1,6 @@
 const { STRING } = require('sequelize');
 const { sequelize} = require('../db');
-const { Item} = require('./Item');
+const { Item} = require('./index');
 
 // Test case for creating an item
 describe('Item model', () => {
@@ -11,6 +11,7 @@ describe('Item model', () => {
   afterAll(async () => {
     await sequelize.close(); // Closes the database connection after running the tests
   });
+
   it('should create a new item', async () => {
     const newItem = {
       title: 'Test Item',
