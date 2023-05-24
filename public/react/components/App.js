@@ -58,14 +58,13 @@ export const App = () => {
 		<main>
 			
       <h1>Sauce Store</h1>
-			<h2>All things 🔥</h2>
-		
-			<SaucesList sauces={sauces} />
+	  <h2>All things 🔥</h2>
 	  <h1> All Clothing Items</h1>
-			<ItemList items = {items} onPageClick={handleClick}/>
-			{/* onClick ={handleClick}  */}
-			<ItemDetails item={selectedItem} />
-			{/* {console.log(selectedItem)} */}
+	  <SaucesList sauces={sauces} />
+	  <ItemList items = {items} onPageClick={handleClick}/>
+	  <ItemDetails item={selectedItem}/>
+			
+			
 		</main>
 	)
 }

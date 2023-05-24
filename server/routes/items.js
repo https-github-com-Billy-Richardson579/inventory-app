@@ -45,51 +45,14 @@ router.delete("/:id", async (req, res, next) => {
     const item = await Item.findAll()
     res.json(item)
 })
+// UPDATE /items (to update the item selected)
+router.put("/:id", async (req, res, next) => {
+ const item = await Item.update(req.body, {
+  where:{
+   id: req.params.id
+  }
+ })
+ res.json(item)
+})
 
-// / DELETE /wiki/:slug
-// router.delete("/:slug", async (req, res, next) => {
-//   try {
-//     await Page.destroy({
-//       where: {
-//         slug: req.params.slug
-//       }
-//     });
-//     const pages = await Page.findAll();
-//     res.send(pages);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-//   router.post("/", async (req, res, next) => {
-//     try {
-//       const [user, wasCreated] = await Item.findOrCreate({
-//         where: {
-//           name: req.body.name,
-//           email: req.body.email
-//         }
-//       });
-//       const page = await Page.create(req.body);
-//       await page.setAuthor(user);
-//       if(req.body.tags) {
-//         const tagArray = req.body.tags.split(' ');
-//         const tags = [];
-//         for (let tagName of tagArray) {
-//           const [tag, wasCreated] = await Tag.findOrCreate({
-//             where: {
-//               name: tagName
-//             }
-//           });
-//           if (wasCreated) {
-//             tags.push(tag);
-//           }
-//         }
-//         await page.addTags(tags);
-//       }
-//       res.send(page);
-//     } catch (error) {
-//       next(error);
-//     }
-//   });
-  
 module.exports = router;
