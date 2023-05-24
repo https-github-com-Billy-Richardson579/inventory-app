@@ -35,7 +35,7 @@ router.post("/", async (req, res, next) => {
     })
     res.json(item)
 })
-// DELETE /items (to delete the item selected)
+// DELETE /items (to delete the item by ID)
 router.delete("/:id", async (req, res, next) => {
     await Item.destroy({
        where : {
@@ -45,7 +45,7 @@ router.delete("/:id", async (req, res, next) => {
     const item = await Item.findAll()
     res.json(item)
 })
-// UPDATE /items (to update the item selected)
+// UPDATE /items (to update the item by ID)
 router.put("/:id", async (req, res, next) => {
  const item = await Item.update(req.body, {
   where:{
@@ -56,3 +56,4 @@ router.put("/:id", async (req, res, next) => {
 })
 
 module.exports = router;
+
