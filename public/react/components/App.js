@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {SaucesList} from './SaucesList';
-import {ItemList} from './ItemList';
-import {ItemDetails} from './ItemDetails';
-import {Form} from './Form';
+import { SaucesList } from './SaucesList';
+import { ItemList } from './ItemList';
+import { ItemDetails } from './ItemDetails';
+import { Form } from './Form';
 import apiURL from '../api';
 
-export default App = () => {
+export default function App() {
   const [sauces, setSauces] = useState([]);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -45,13 +45,17 @@ export default App = () => {
     fetchSelectedItem(id);
   }
 
+  function handleAddItemClick() {
+    setAddItem(true);
+  }
+
   function handleBackToList() {
     setSelectedItem(null);
-    setAddItem(false)
+    setAddItem(false);
   }
 
   async function handleDeletePage(id) {
-    try {
+    try {                                                          
       await fetch(`${apiURL}/items/${id}`, { method: 'DELETE' });
       setItems(items.filter((item) => item.id !== id));
       setSelectedItem(null);
@@ -60,12 +64,12 @@ export default App = () => {
     }
   }
 
-  async function handleAddItem(itemData) {
+  async function handleAddItemSubmit(itemData) {
     try {
       const response = await fetch(`${apiURL}/items`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(itemData),
       });
@@ -84,23 +88,21 @@ export default App = () => {
 
   return (
     <main>
-      <h1>Sauce Store</h1>
+      <h1>Best Store</h1>
       <h2>All things 🔥</h2>
       {selectedItem ? (
         <ItemDetails item={selectedItem} onBackToList={handleBackToList} onDelete={handleDeletePage} />
       ) : addItem ? (
-        <Form onSubmit={handleAddItem} onCancel={handleBackToList}/>
+        <Form onSubmit={handleAddItemSubmit} onCancel={handleBackToList} />
       ) : (
-      <>
-        <button onClick={() => setAddItem(true)}>
-          <strong>Add Item</strong>
-        </button>
-        
-          <SaucesList sauces={sauces} />
+        <>
+          <button onClick={handleAddItemClick}>Add Item</button>
+          {/* <SaucesList sauces={sauces} /> */}
           <ItemList items={items} onItemClick={handleItemClick} />
         </>
       )}
     </main>
   );
-};
+}
+
 

@@ -3,3 +3,18 @@
   box-sizing: border-box;
   background-color: rgb(223, 223, 223);
 }
+
+#images{
+  max-width: 150px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 auto
+}
+#items{
+  display: block;
+  text-align: center;
+  border: 2px black solid;
+  background-color: white;
+
+}
