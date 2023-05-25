@@ -47,6 +47,7 @@ export default App = () => {
 
   function handleBackToList() {
     setSelectedItem(null);
+    setAddItem(false)
   }
 
   async function handleDeletePage(id) {
@@ -85,17 +86,16 @@ export default App = () => {
     <main>
       <h1>Sauce Store</h1>
       <h2>All things 🔥</h2>
-      {addItem ? (
-        <Form onSubmit={handleAddItem} />
+      {selectedItem ? (
+        <ItemDetails item={selectedItem} onBackToList={handleBackToList} onDelete={handleDeletePage} />
+      ) : addItem ? (
+        <Form onSubmit={handleAddItem} onCancel={handleBackToList}/>
       ) : (
+      <>
         <button onClick={() => setAddItem(true)}>
           <strong>Add Item</strong>
         </button>
-      )}
-      {selectedItem ? (
-        <ItemDetails item={selectedItem} onBackToList={handleBackToList} onDelete={handleDeletePage} />
-      ) : (
-        <>
+        
           <SaucesList sauces={sauces} />
           <ItemList items={items} onItemClick={handleItemClick} />
         </>
