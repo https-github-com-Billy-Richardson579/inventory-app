@@ -47,14 +47,31 @@ router.delete("/:id", async (req, res, next) => {
 })
 // UPDATE /items (to update the item selected)
 router.put("/:id", async (req, res, next) => {
- const item = await Item.update(req.body, {
-  where:{
-   id: req.params.id
-  }
- })
- res.json(item)
-})
+  try {
+    const { id } = req.params;
+    const { title, price, image, category, description } = req.body;
 
+    const item = await Item.findByPk(id);
+
+    if (!item) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+
+    item.title = title;
+    item.price = price;
+    item.image = image;
+    item.category = category;
+    item.description = description;
+
+    await item.save();
+
+    res.json(item);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+ 
 module.exports = router;
 
 

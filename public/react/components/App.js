@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { SaucesList } from './SaucesList';
 import { ItemList } from './ItemList';
 import { ItemDetails } from './ItemDetails';
 import { Form } from './Form';
@@ -91,7 +90,7 @@ export default function App() {
       <h1>Best Store</h1>
       <h2>All things 🔥</h2>
       {selectedItem ? (
-        <ItemDetails item={selectedItem} onBackToList={handleBackToList} onDelete={handleDeletePage} />
+        <ItemDetails item={selectedItem} onBackToList={handleBackToList} onDelete={handleDeletePage} setItems={setItems} items={items} />
       ) : addItem ? (
         <Form onSubmit={handleAddItemSubmit} onCancel={handleBackToList} />
       ) : (
@@ -104,5 +103,6 @@ export default function App() {
     </main>
   );
 }
+
 
 

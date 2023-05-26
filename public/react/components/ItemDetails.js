@@ -1,35 +1,37 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
+import apiURL from '../api';
+import { UpdateListForm } from './UpdateListForm';
 
 export const ItemDetails = ({ item, onBackToList, onDelete }) => {
   const { id, title, price, category, description, image } = item;
-  const [updateItem, setUpdateItem]= useState(false)
+  const [updateItem, setUpdateItem] = useState(false);
 
   const handleDelete = () => {
     onDelete(id);
   };
 
-  function handleUpdateItem() {
+  const handleUpdateItem = () => {
     setUpdateItem(true);
-  }
+  };
 
-
-  async function handleUpdateItemSubmit(itemData) {
+  const handleUpdateItemSubmit = async (updatedItem) => {
     try {
       const response = await fetch(`${apiURL}/items/${id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(itemData),
+        body: JSON.stringify(updatedItem),
       });
-      const newItem = await response.json();
-      setItems([...items, newItem]);
+      const updatedItemData = await response.json();
       setUpdateItem(false);
-    } catch (err) {
-      console.log('Oh no an error! ', err);
+      // Handle the updated item data as required 
+      console.log('Item updated:', updatedItemData);
+    } catch (error) {
+      console.log('Error updating item:', error);
+      // Handle the error
     }
-  }
-
+  };
 
   return (
     <div>
@@ -41,19 +43,16 @@ export const ItemDetails = ({ item, onBackToList, onDelete }) => {
       <p>Image: {image}</p>
       <button onClick={handleDelete}>Delete</button>
       <button onClick={onBackToList}>Back</button>
-      <>
-        <button onClick={() => handleUpdateItem(true)}>
-          <strong>Update</strong>
-        </button>
-      </>
+      <button onClick={handleUpdateItem}>
+        <strong>Update</strong>
+      </button>
+      {updateItem && (
+        <UpdateListForm
+          item={item}
+          onSubmit={handleUpdateItemSubmit}
+          onCancel={() => setUpdateItem(false)}
+        />
+      )}
     </div>
   );
 };
-
-
-
-
-
-
-
-
