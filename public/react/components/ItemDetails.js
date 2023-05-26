@@ -35,12 +35,13 @@ export const ItemDetails = ({ item, onBackToList, onDelete }) => {
 
   return (
     <div>
-      <h2>Item Detail</h2>
+      <img id="images" src={image}/>
+      <h2>Item Details</h2>
       <p>Name: {title}</p>
       <p>Price: {price}</p>
       <p>Category: {category}</p>
       <p>Description: {description}</p>
-      <p>Image: {image}</p>
+      
       <button onClick={handleDelete}>Delete</button>
       <button onClick={onBackToList}>Back</button>
       <button onClick={handleUpdateItem}>

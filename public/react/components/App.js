@@ -95,7 +95,7 @@ export default function App() {
         <Form onSubmit={handleAddItemSubmit} onCancel={handleBackToList} />
       ) : (
         <>
-          <button onClick={handleAddItemClick}>Add Item</button>
+          <button id="addItem" onClick={handleAddItemClick}>Add Item</button>
           {/* <SaucesList sauces={sauces} /> */}
           <ItemList items={items} onItemClick={handleItemClick} />
         </>
